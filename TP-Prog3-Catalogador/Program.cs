@@ -18,7 +18,6 @@ namespace TP_Prog3_Catalogador
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            
         }
     }
 }
