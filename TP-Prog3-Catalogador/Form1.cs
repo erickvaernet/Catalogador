@@ -211,7 +211,9 @@ namespace TP_Prog3_Catalogador
             if (dataGridView2.CurrentRow.Cells[0].Value == null) return;
             DirectoryInfo directorioSeleccionado=new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
 
+            treeView3.Nodes.Clear();
             LoadFolder(treeView3.Nodes, directorioSeleccionado);
+            treeView3.ExpandAll;
         }
         private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
         {
