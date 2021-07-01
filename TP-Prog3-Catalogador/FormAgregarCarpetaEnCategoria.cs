@@ -53,6 +53,8 @@ namespace TP_Prog3_Catalogador
         private void button1_Click(object sender, EventArgs e)
         {
             //((Form1)this.Owner).NodoAuxiliar = new NodoAuxiliar(this.Directorio, comboBox1.Text, comboBox2.Text);
+            
+            //Agregarmos la Carpeta al nodo correspondiente segun categoria
             Nodo nodoauxiliar = BuscarNodoCategoria(comboBox1.SelectedItem.ToString(), nodoAdaptador.NodoRaiz);
             if (nodoauxiliar == null) MessageBox.Show("Error al adjuntar carpeta a la categoria");
             else 
@@ -61,7 +63,9 @@ namespace TP_Prog3_Catalogador
                 else nodoauxiliar.Carpetas.Add(directorio);
             }
 
-            MessageBox.Show("nodo:" + nodoauxiliar.Nombre + "-Carpeta:" + nodoauxiliar.Carpetas[0].FullName);
+            //Agregamos los comentarios
+            //nodoauxiliar.Comentario;
+
             
         }
 
