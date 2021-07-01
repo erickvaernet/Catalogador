@@ -60,9 +60,10 @@ namespace TP_Prog3_Catalogador
             else 
             {
                 if (Directorio.FullName == null) MessageBox.Show("Error al instanciar el directorio");
-                else nodoauxiliar.Carpetas.Add(directorio);
+                else nodoauxiliar.CarpetasComentadas.Add(new CarpetaComentada(directorio,textBox1.Text));
             }
-
+            
+            this.Dispose();
             //Agregamos los comentarios
             //nodoauxiliar.Comentario;
 

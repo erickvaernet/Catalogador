@@ -154,7 +154,7 @@ namespace TP_Prog3_Catalogador
         {
             //al seleccionar nodo trae las carpetas asociadas a ese nodo
 
-            List<DirectoryInfo> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().Carpetas;
+            List<CarpetaComentada> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
             
             //TODO: Reveeer esto, dudo que funcione;
             dataGridView2.DataSource = carpetasSeleccionadas;
