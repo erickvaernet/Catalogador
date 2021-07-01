@@ -40,6 +40,7 @@ namespace TP_Prog3_Catalogador
 
         private void button1_Click(object sender, EventArgs e)
         {
+            /*
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
                 !String.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
             {
@@ -49,7 +50,7 @@ namespace TP_Prog3_Catalogador
                 //formAgregarCarpetaEnCategoria.Lugares =
 
                 formAgregarCarpetaEnCategoria.ShowDialog();
-            }
+            }*/
         }
         
         private void button2_Click(object sender, EventArgs e)
@@ -160,6 +161,20 @@ namespace TP_Prog3_Catalogador
             dataGridView2.DataSource = carpetasSeleccionadas;
 
             
+        }
+
+        private void agregarCarpetaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
+                !String.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
+            {
+                FormAgregarCarpetaEnCategoria formAgregarCarpetaEnCategoria = new FormAgregarCarpetaEnCategoria(nodoAdapter, nodoAdapter.MapearNodoSeleccionado());
+
+                formAgregarCarpetaEnCategoria.Directorio = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
+                //formAgregarCarpetaEnCategoria.Lugares =
+
+                formAgregarCarpetaEnCategoria.ShowDialog();
+            }
         }
     }
 }

@@ -33,11 +33,9 @@ namespace TP_Prog3_Catalogador
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -64,7 +62,7 @@ namespace TP_Prog3_Catalogador
             this.textBox1.Location = new System.Drawing.Point(35, 161);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(325, 156);
+            this.textBox1.Size = new System.Drawing.Size(654, 225);
             this.textBox1.TabIndex = 2;
             // 
             // label3
@@ -76,24 +74,6 @@ namespace TP_Prog3_Catalogador
             this.label3.TabIndex = 3;
             this.label3.Text = "Comentario:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(419, 173);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 15);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Categoria:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(419, 232);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Lugar:";
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(278, 465);
@@ -104,32 +84,32 @@ namespace TP_Prog3_Catalogador
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox1
+            // label4
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(486, 170);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(181, 23);
-            this.comboBox1.TabIndex = 7;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(175, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Categoria en la que se agregara:";
             // 
-            // comboBox2
+            // label5
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(486, 229);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(181, 23);
-            this.comboBox2.TabIndex = 8;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(217, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "label5";
             // 
             // FormAgregarCarpetaEnCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 535);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -147,10 +127,8 @@ namespace TP_Prog3_Catalogador
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
