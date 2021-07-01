@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -15,10 +16,10 @@ namespace TP_Prog3_Catalogador
 {
     public partial class Form1 : Form {
 
-        private XmlTextWriter xr;
+        
         private FileInfo workingDirectory;
         private NodoAdaptador nodoAdapter = new NodoAdaptador();
-        private List<FileInfo> carpetas = new List<FileInfo>();
+        private List<FileInfo> carpetasSeleccionadas = new List<FileInfo>();
         private NodoAuxiliar nodoAuxiliar;
 
         internal NodoAuxiliar NodoAuxiliar { get => nodoAuxiliar; set => nodoAuxiliar = value; }
@@ -54,118 +55,11 @@ namespace TP_Prog3_Catalogador
                 formAgregarCarpetaEnCategoria.ShowDialog();
             }
         }
-
         
-        private void populateTreeview()
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open XML Document";
-            dlg.Filter = "XML Files (*.xml)|*.xml";
-            dlg.FileName = Application.StartupPath + "\\..\\..\\example.xml";
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    //Just a good practice -- change the cursor to a 
-                    //wait cursor while the nodes populate
-                    this.Cursor = Cursors.WaitCursor;
-                    //First, we'll load the Xml document
-                    XmlDocument xDoc = new XmlDocument();
-                    xDoc.Load(dlg.FileName);
-                    //Now, clear out the treeview, 
-                    //and add the first (root) node
-                    treeView1.Nodes.Clear();
-                    treeView1.Nodes.Add(new
-                      TreeNode(xDoc.DocumentElement.Name));
-                    TreeNode tNode = new TreeNode();
-                    tNode = (TreeNode)treeView1.Nodes[0];
-                    //We make a call to addTreeNode, 
-                    //where we'll add all of our nodes
-                    addTreeNode(xDoc.DocumentElement, tNode);
-                    //Expand the treeview to show all nodes
-                    treeView1.ExpandAll();
-                }
-                catch (XmlException xExc)
-                //Exception is thrown is there is an error in the Xml
-                {
-                    MessageBox.Show(xExc.Message);
-                }
-                catch (Exception ex) //General exception
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    this.Cursor = Cursors.Default; //Change the cursor back
-                }
-            }
-        }
-        //This function is called recursively until all nodes are loaded
-        private void addTreeNode(XmlNode xmlNode, TreeNode treeNode)
-        {
-            XmlNode xNode;
-            TreeNode tNode;
-            XmlNodeList xNodeList;
-            if (xmlNode.HasChildNodes) //The current node has children
-            {
-                xNodeList = xmlNode.ChildNodes;
-                for (int x = 0; x <= xNodeList.Count - 1; x++)
-                //Loop through the child nodes
-                {
-                    xNode = xmlNode.ChildNodes[x];
-                    treeNode.Nodes.Add(new TreeNode(xNode.Name));
-                    tNode = treeNode.Nodes[x];
-                    addTreeNode(xNode, tNode);
-                }
-            }
-            else //No children, so add the outer xml (trimming off whitespace)
-                treeNode.Text = xmlNode.OuterXml.Trim();
-        }
-
-        public void exportToXml2(TreeView tv, string filename)
-        {
-            xr = new XmlTextWriter(filename, System.Text.Encoding.UTF8);
-            xr.WriteStartDocument();
-            //Write our root node
-            xr.WriteStartElement(treeView1.Nodes[0].Text);
-            foreach (TreeNode node in tv.Nodes)
-            {
-                saveNode2(node.Nodes);
-            }
-            //Close the root node
-            xr.WriteEndElement();
-            xr.Close();
-        }
-
-        private void saveNode2(TreeNodeCollection tnc)
-        {
-            foreach (TreeNode node in tnc)
-            {
-                //If we have child nodes, we'll write 
-                //a parent node, then iterrate through
-                //the children
-                if (node.Nodes.Count > 0)
-                {
-                    xr.WriteStartElement(node.Text);
-                    saveNode2(node.Nodes);
-                    xr.WriteEndElement();
-                }
-                else //No child nodes, so we just write the text
-                {
-                    /*
-                     * lista de carpetas con sus nodos y comentarios asi en el if pregunto si el nodo.Text es igual al nodo de carpeta
-                     * escribo con la carpeta y un comentario
-                     * if(get )
-                     */
-                    //xr.WriteStartElement(node.Text);
-                    xr.WriteString(node.Text); //Si no tiene hijos podemos escribir carpetas
-                }
-            }
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            populateTreeview();
+            
         }
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,6 +107,63 @@ namespace TP_Prog3_Catalogador
                     catDisponibles.Add(node.Text);
                 }
             }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //quitar
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String jsonString;
+            
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(saveFileDialog1.FileName)) 
+            {
+                //Escribir nodo en json:
+                jsonString = JsonSerializer.Serialize<Nodo>(nodoAdapter.NodoRaiz);
+                File.WriteAllText(saveFileDialog1.FileName, jsonString);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            /*
+             * Creamos una ventana de OpenFileDialog que seleccione el archivo a abrir, si apeta en OK y se tiene
+             * seleccionado una rchivo, entonces se procede a leer el archivo .json y parsearlo a un objeto Nodo
+             * el cual se usara como nueva Raiz del nodo principal del programa (nodoAdapter) 
+             */
+            if (openFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(openFileDialog1.FileName)) 
+            {
+                //Leemos el archivo y asignamos el nuevo nodo raiz, nodoadapter:
+                nodoAdapter.ControlRaizCreada = false;
+
+                String jsonString;
+                jsonString = File.ReadAllText(openFileDialog1.FileName);
+                Nodo nodoAuxiliar = JsonSerializer.Deserialize<Nodo>(jsonString);                
+                nodoAdapter.NodoRaiz = nodoAuxiliar;
+
+                nodoAdapter.ControlRaizCreada = true;
+                //--------------------------------------------------------------
+
+                //Cargamos el nodo al treeView 
+                nodoAdapter.CargarRaizATreeView(); 
+
+            }
+                
+        }
+
+        private void treeView1_DoubleClick(object sender, EventArgs e)
+        {
+            //al seleccionar nodo trae las carpetas asociadas a ese nodo
+
+            List<FileInfo> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().Carpetas;
+            
+            //TODO: Reveeer esto, dudo que funcione;
+            dataGridView2.DataSource = carpetasSeleccionadas;
+
+            
         }
     }
 }
