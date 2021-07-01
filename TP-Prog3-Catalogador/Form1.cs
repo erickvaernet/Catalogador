@@ -43,10 +43,9 @@ namespace TP_Prog3_Catalogador
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
                 !String.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
             {
-                FormAgregarCarpetaEnCategoria formAgregarCarpetaEnCategoria = new FormAgregarCarpetaEnCategoria(getCategorias());
+                FormAgregarCarpetaEnCategoria formAgregarCarpetaEnCategoria = new FormAgregarCarpetaEnCategoria(nodoAdapter);
 
-                formAgregarCarpetaEnCategoria.Directorio = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
-               
+                formAgregarCarpetaEnCategoria.Directorio = new DirectoryInfo(folderBrowserDialog1.SelectedPath);               
                 //formAgregarCarpetaEnCategoria.Lugares =
 
                 formAgregarCarpetaEnCategoria.ShowDialog();

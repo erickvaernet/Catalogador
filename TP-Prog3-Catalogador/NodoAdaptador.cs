@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TP_Prog3_Catalogador
 {
-    class NodoAdaptador
+    public class NodoAdaptador
     {
         private bool controlRaizCreada = false;
         private TreeView treeView;

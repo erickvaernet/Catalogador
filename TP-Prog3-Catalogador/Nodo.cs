@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TP_Prog3_Catalogador
 {
-    class Nodo
+    public class Nodo
     {
         public String Nombre { get; set; }
         public List<DirectoryInfo> Carpetas { get; set; }

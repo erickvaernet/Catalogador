@@ -15,25 +15,31 @@ namespace TP_Prog3_Catalogador
     {
         private DirectoryInfo directorio;
         private List<String> lugares;
+        private NodoAdaptador nodoAdaptador; //TODO: cambiar  Nodo simplemente, es lo que se usa
 
-        public FormAgregarCarpetaEnCategoria(List<String> categorias)
+        public FormAgregarCarpetaEnCategoria(NodoAdaptador nodoAdapter)
         {
             InitializeComponent();
-            if (categorias == null)
+            if (nodoAdapter == null)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Error al cargar el NodoAdaptador");
             }
-            
-            foreach (String categoria in categorias)
+            this.nodoAdaptador = nodoAdapter;
+
+            CargarCategorias(nodoAdapter.NodoRaiz); //carga las categorias
+
+        }
+
+        private void CargarCategorias(Nodo nodoPrincipal)            
+        {
+            foreach (Nodo nodo in nodoPrincipal.NodosHijos)
             {
-                comboBox1.Items.Add(categoria);
+                if (nodo.NodosHijos.Count > 0)
+                {
+                    CargarCategorias(nodo);
+                }
+                comboBox1.Items.Add(nodo.Nombre);
             }
-            /*
-            foreach (String lugar in lugares)
-            {
-                comboBox2.Items.Add(lugar);
-            }
-            //label2.Text=((Form1)this.Owner).*/
         }
 
         public DirectoryInfo Directorio { get => directorio; set => directorio = value; }
@@ -46,8 +52,30 @@ namespace TP_Prog3_Catalogador
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ((Form1)this.Owner).NodoAuxiliar = new NodoAuxiliar(this.Directorio, comboBox1.Text, comboBox2.Text);
+            //((Form1)this.Owner).NodoAuxiliar = new NodoAuxiliar(this.Directorio, comboBox1.Text, comboBox2.Text);
+            Nodo nodoauxiliar = BuscarNodoCategoria(comboBox1.SelectedItem.ToString(), nodoAdaptador.NodoRaiz);
+            if (nodoauxiliar == null) MessageBox.Show("Error al adjuntar carpeta a la categoria");
+            else 
+            {
+                if (Directorio.FullName == null) MessageBox.Show("Error al instanciar el directorio");
+                else nodoauxiliar.Carpetas.Add(directorio);
+            }
 
+            MessageBox.Show("nodo:" + nodoauxiliar.Nombre + "-Carpeta:" + nodoauxiliar.Carpetas[0].FullName);
+            
+        }
+
+        private Nodo BuscarNodoCategoria(String nombreCategoria,Nodo nodoPrincipal)
+        {
+            foreach (Nodo nodo in nodoPrincipal.NodosHijos)
+            {
+                if (nodo.NodosHijos.Count > 0)
+                {
+                    CargarCategorias(nodo);
+                }
+                if (nodo.Nombre == nombreCategoria) return nodo;       
+            }
+            return null;
         }
     }
 }
