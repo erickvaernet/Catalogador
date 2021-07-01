@@ -40,7 +40,6 @@ namespace TP_Prog3_Catalogador
             this.agregarCarpetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView2 = new System.Windows.Forms.TreeView();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,21 +63,24 @@ namespace TP_Prog3_Catalogador
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.label1 = new System.Windows.Forms.Label();
+            this.treeView3 = new System.Windows.Forms.TreeView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 86);
+            this.tabControl1.Location = new System.Drawing.Point(0, 64);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(404, 280);
@@ -152,22 +154,14 @@ namespace TP_Prog3_Catalogador
             this.treeView2.Size = new System.Drawing.Size(383, 239);
             this.treeView2.TabIndex = 0;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.dataGridView2);
-            this.panel1.Location = new System.Drawing.Point(422, 110);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(746, 256);
-            this.panel1.TabIndex = 2;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView2.Location = new System.Drawing.Point(410, 88);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(740, 249);
+            this.dataGridView2.Size = new System.Drawing.Size(748, 256);
             this.dataGridView2.TabIndex = 1;
             // 
             // menuStrip1
@@ -321,19 +315,48 @@ namespace TP_Prog3_Catalogador
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(422, 86);
+            this.label1.Location = new System.Drawing.Point(410, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(344, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Propiedades de las carpetas dentro de  la categoria seleccionada";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // treeView3
+            // 
+            this.treeView3.Location = new System.Drawing.Point(4, 379);
+            this.treeView3.Name = "treeView3";
+            this.treeView3.Size = new System.Drawing.Size(393, 270);
+            this.treeView3.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 361);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(196, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Explorador de Carpeta Seleccionada";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(410, 379);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(748, 270);
+            this.dataGridView1.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1180, 661);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.treeView3);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
@@ -342,11 +365,11 @@ namespace TP_Prog3_Catalogador
             this.tabPage1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,7 +380,6 @@ namespace TP_Prog3_Catalogador
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -387,6 +409,9 @@ namespace TP_Prog3_Catalogador
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem agregarCarpetaToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TreeView treeView3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

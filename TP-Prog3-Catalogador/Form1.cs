@@ -176,5 +176,10 @@ namespace TP_Prog3_Catalogador
                 formAgregarCarpetaEnCategoria.ShowDialog();
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
