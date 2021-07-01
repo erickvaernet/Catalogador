@@ -1,0 +1,51 @@
+[33mcommit de723b4cad1c4db17311b6d338df2d6b27b35e6b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Tue Jun 29 21:23:41 2021 -0300
+
+    ult
+
+[33mcommit 2032282e06863625bc49c0e18859db88e419f41d[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Tue Jun 29 21:06:36 2021 -0300
+
+    Revert "fix"
+    
+    This reverts commit bf453e44d8dc4124f5bf9d8f8eec7caaf688e29c.
+
+[33mcommit e32878cc1559a4b9abfce547a3ada6d29688dc73[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Tue Jun 29 21:01:21 2021 -0300
+
+    Revert "Ojala no vuelva a tocar C#"
+    
+    This reverts commit 26c9acbe9e798401b3dab7e1c7403005ac069ed3.
+
+[33mcommit 26c9acbe9e798401b3dab7e1c7403005ac069ed3[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Tue Jun 29 20:47:02 2021 -0300
+
+    Ojala no vuelva a tocar C#
+
+[33mcommit bf453e44d8dc4124f5bf9d8f8eec7caaf688e29c[m
+Author: Juan Manuel Mascotena <jmmascotena@gmail.com>
+Date:   Fri Jun 25 21:27:08 2021 -0300
+
+    fix
+
+[33mcommit 3caa9dd78d4d8d2436157ba7f2c8e2aaf0a7aa5d[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Sun Jun 20 22:41:31 2021 -0300
+
+    fix
+
+[33mcommit 5a253c534051096e23dd1ea4e823d38f079abaec[m
+Author: erick <erickadrielnet@gmail.com>
+Date:   Sun Jun 20 22:38:39 2021 -0300
+
+    First Commit: Esbozo
+
+[33mcommit 0616bf1c2f0b38edb558499f6a6e53b9b6e69975[m
+Author: Erick Adriel Vaernet <62777476+erioni9512@users.noreply.github.com>
+Date:   Sun Jun 20 22:00:35 2021 -0300
+
+    Initial commit
