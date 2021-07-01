@@ -213,7 +213,7 @@ namespace TP_Prog3_Catalogador
 
             treeView3.Nodes.Clear();
             LoadFolder(treeView3.Nodes, directorioSeleccionado);
-            treeView3.ExpandAll;
+            treeView3.ExpandAll();
         }
         private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
         {
