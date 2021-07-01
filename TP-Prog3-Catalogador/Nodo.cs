@@ -10,7 +10,7 @@ namespace TP_Prog3_Catalogador
     class Nodo
     {
         public String Nombre { get; set; }
-        public List<FileInfo> Carpetas { get; set; }
+        public List<DirectoryInfo> Carpetas { get; set; }
         public String Comentario { get; set; }
         public List<Nodo> NodosHijos { get; set; }
 
@@ -18,13 +18,13 @@ namespace TP_Prog3_Catalogador
         {
             this.NodosHijos = new List<Nodo>(); 
             this.Nombre = nombre;
-            this.Carpetas = new List<FileInfo>();
+            this.Carpetas = new List<DirectoryInfo>();
         }
 
         public Nodo() 
         { 
             this.NodosHijos = new List<Nodo>();
-            this.Carpetas = new List<FileInfo>();
+            this.Carpetas = new List<DirectoryInfo>();
         }
        
 

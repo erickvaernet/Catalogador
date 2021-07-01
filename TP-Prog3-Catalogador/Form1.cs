@@ -20,9 +20,6 @@ namespace TP_Prog3_Catalogador
         private FileInfo workingDirectory;
         private NodoAdaptador nodoAdapter = new NodoAdaptador();
         private List<FileInfo> carpetasSeleccionadas = new List<FileInfo>();
-        private NodoAuxiliar nodoAuxiliar;
-
-        internal NodoAuxiliar NodoAuxiliar { get => nodoAuxiliar; set => nodoAuxiliar = value; }
 
         public Form1()
         {
@@ -158,7 +155,7 @@ namespace TP_Prog3_Catalogador
         {
             //al seleccionar nodo trae las carpetas asociadas a ese nodo
 
-            List<FileInfo> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().Carpetas;
+            List<DirectoryInfo> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().Carpetas;
             
             //TODO: Reveeer esto, dudo que funcione;
             dataGridView2.DataSource = carpetasSeleccionadas;
