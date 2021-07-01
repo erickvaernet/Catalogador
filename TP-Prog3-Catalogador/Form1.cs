@@ -71,8 +71,9 @@ namespace TP_Prog3_Catalogador
         private void quitarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode.Text == "Categorias") return;
-
-            treeView1.SelectedNode.Remove();
+            nodoAdapter.QuitarNodoSeleccionado();
+            nodoAdapter.CargarRaizATreeView();
+            //treeView1.SelectedNode.Remove();
         }
 
 

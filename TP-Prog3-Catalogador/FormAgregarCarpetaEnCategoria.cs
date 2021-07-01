@@ -74,6 +74,7 @@ namespace TP_Prog3_Catalogador
         {
             foreach (Nodo nodo in nodoPrincipal.NodosHijos)
             {
+                if (nodo.Nombre == nombreCategoria) return nodo;
                 if (nodo.NodosHijos.Count > 0)
                 {
                     CargarCategorias(nodo);

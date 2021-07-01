@@ -120,6 +120,45 @@ namespace TP_Prog3_Catalogador
             else treeNode.Text = nodo.Nombre;            
         }
 
+        public void QuitarNodoSeleccionado() 
+        {
+            Nodo nodoAeliminar = MapearNodoSeleccionado();
+
+            Nodo nodoPadre = ObtenerPadreSeleccionado(nodoAeliminar);
+
+            foreach (Nodo nodoaux in nodoPadre.NodosHijos)
+            {
+                if (nodoaux.Nombre == nodoAeliminar.Nombre) 
+                {
+                    nodoPadre.NodosHijos.Remove(nodoaux);
+                    break;
+                }
+                  
+            }            
+
+        }
+
+        private Nodo ObtenerPadreSeleccionado(Nodo nodo)
+        {
+            List<int> lvls = new();
+
+            TreeNode treeNodeSeleccionado = treeView.SelectedNode;
+            while (treeNodeSeleccionado.Parent != null)
+            {
+                lvls.Insert(0, treeNodeSeleccionado.Index);
+                treeNodeSeleccionado = treeNodeSeleccionado.Parent;
+            }
+
+            int contador = 0;
+            Nodo nodoAux = nodoRaiz;
+            foreach (int lvl in lvls)
+            {
+                contador++;
+                if(contador==(lvls.Count()-1)) nodoAux = nodoAux.NodosHijos[lvl];
+            }
+            return nodoAux;
+
+        }
 
         /*
         if (nodo.NodosHijos.Count() == 0)
