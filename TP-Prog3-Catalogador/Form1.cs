@@ -16,7 +16,8 @@ namespace TP_Prog3_Catalogador
     public partial class Form1 : Form {
 
         private XmlTextWriter xr;
-
+        private FileInfo workingDirectory;
+        private NodoAdaptador nodoAdapter = new NodoAdaptador();
         private List<FileInfo> carpetas = new List<FileInfo>();
         private NodoAuxiliar nodoAuxiliar;
 
@@ -25,11 +26,11 @@ namespace TP_Prog3_Catalogador
         public Form1()
         {
             InitializeComponent();
-            treeView1.Nodes.Add("Categorias");
-            treeView1.Nodes[0].Nodes.Add("cat1");
+            //if(workingDirectory==null)
+            Nodo nodoRaiz1 = new Nodo();
 
-            treeView1.Nodes[0].Nodes[0].Nodes.Add("cat1.1");
-
+            nodoAdapter.AgregarNodoRaiz("Categorias", treeView1, nodoRaiz1);
+            
             treeView2.Nodes.Add("Lugares");
             label1.Text = treeView1.Nodes[0].Text;
         }
@@ -54,7 +55,7 @@ namespace TP_Prog3_Catalogador
             }
         }
 
-        //Open the XML file, and start to populate the treeview
+        
         private void populateTreeview()
         {
             OpenFileDialog dlg = new OpenFileDialog();
