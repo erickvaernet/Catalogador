@@ -109,7 +109,8 @@ namespace TP_Prog3_Catalogador
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(383, 239);
             this.treeView1.TabIndex = 0;
-            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            
             // 
             // contextMenuStrip1
             // 
@@ -273,7 +274,6 @@ namespace TP_Prog3_Catalogador
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -372,6 +372,7 @@ namespace TP_Prog3_Catalogador
             this.treeView3.Name = "treeView3";
             this.treeView3.Size = new System.Drawing.Size(393, 270);
             this.treeView3.TabIndex = 5;
+            this.treeView3.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
             // 
             // label2
             // 

@@ -14,17 +14,14 @@ using System.Xml;
 
 namespace TP_Prog3_Catalogador
 {
-    public partial class Form1 : Form {
-
+    public partial class Form1 : Form {        
         
-        private FileInfo workingDirectory;
         private NodoAdaptador nodoAdapter = new NodoAdaptador();
         private List<FileInfo> carpetasSeleccionadas = new List<FileInfo>();
 
         public Form1()
         {
             InitializeComponent();
-            //if(workingDirectory==null)
             Nodo nodoRaiz1 = new Nodo();
 
             nodoAdapter.AgregarNodoRaiz("Categorias", treeView1, nodoRaiz1);
@@ -33,30 +30,6 @@ namespace TP_Prog3_Catalogador
             label1.Text = treeView1.Nodes[0].Text;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
-                !String.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
-            {
-                FormAgregarCarpetaEnCategoria formAgregarCarpetaEnCategoria = new FormAgregarCarpetaEnCategoria(nodoAdapter);
-
-                formAgregarCarpetaEnCategoria.Directorio = new DirectoryInfo(folderBrowserDialog1.SelectedPath);               
-                //formAgregarCarpetaEnCategoria.Lugares =
-
-                formAgregarCarpetaEnCategoria.ShowDialog();
-            }*/
-        }
-        
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,7 +37,6 @@ namespace TP_Prog3_Catalogador
             if (treeView1.SelectedNode != null && !String.IsNullOrWhiteSpace(nombre)) {
 
                 nodoAdapter.AgregarNodoHijo(nombre);
-                //treeView1.SelectedNode.Nodes.Add(nombre);
             }
 
         }
@@ -74,7 +46,6 @@ namespace TP_Prog3_Catalogador
             if (treeView1.SelectedNode.Text == "Categorias") return;
             nodoAdapter.QuitarNodoSeleccionado();
             nodoAdapter.CargarRaizATreeView();
-            //treeView1.SelectedNode.Remove();
         }
 
 
@@ -91,14 +62,12 @@ namespace TP_Prog3_Catalogador
         {
             foreach (TreeNode node in tnc)
             {
-                //If we have child nodes, we'll write 
-                //a parent node, then iterrate through
-                //the children
+                
                 if (node.Nodes.Count > 0)
                 {
                     recursivoNodo(node.Nodes);
                 }
-                else //No child nodes, so we just write the text
+                else 
                 {
                     //Si no tiene hijos podemos escribir carpetas
                     catDisponibles.Add(node.Text);
@@ -106,10 +75,6 @@ namespace TP_Prog3_Catalogador
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //quitar
-        }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -148,45 +113,10 @@ namespace TP_Prog3_Catalogador
                 nodoAdapter.CargarRaizATreeView(); 
 
             }
-                
+
         }
 
-        private void treeView1_DoubleClick(object sender, EventArgs e)
-        {
-            
-            //Se limpia la grilla
-            dataGridView2.Rows.Clear();
-
-            //al seleccionar nodo trae las carpetas asociadas a ese nodo
-            List<CarpetaComentada> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
-
-            if (carpetasSeleccionadas.Count() > 0)
-            {
-                foreach (CarpetaComentada carpeta in carpetasSeleccionadas) 
-                {
-                    DataGridViewRow fila = new DataGridViewRow();
-                    fila.CreateCells(dataGridView2);
-                    fila.Cells[0].Value = carpeta.Directorio.FullName;
-                    fila.Cells[1].Value = carpeta.Comentario;
-                    fila.Cells[2].Value = carpeta.numeroDeDirectoriosHijos.ToString();
-                    fila.Cells[3].Value = carpeta.numeroDeArchivosHijos.ToString();
-                    fila.Cells[4].Value = carpeta.TamañoEnKB;
-                    dataGridView2.Rows.Add(fila);
-                }
-
-            }
-            
-
-            /*
-            foreach (CarpetaComentada carpeta in carpetasSeleccionadas) 
-            {
-                dataGridView2.Rows.Add(carpeta);
-            }*/
-            
-
-            
-        }
-
+        //Agregar carpeta a Una categoria
         private void agregarCarpetaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
@@ -199,6 +129,8 @@ namespace TP_Prog3_Catalogador
 
                 formAgregarCarpetaEnCategoria.ShowDialog();
             }
+            ActualizarGrillaPrincipal();
+            ActualizarTreeViewSecundario();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -208,13 +140,20 @@ namespace TP_Prog3_Catalogador
 
         private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            ActualizarTreeViewSecundario();
+        }
+
+        private void ActualizarTreeViewSecundario() {
             if (dataGridView2.CurrentRow.Cells[0].Value == null) return;
-            DirectoryInfo directorioSeleccionado=new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
+            DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
 
             treeView3.Nodes.Clear();
             LoadFolder(treeView3.Nodes, directorioSeleccionado);
             treeView3.ExpandAll();
         }
+
+
+
         private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
         {
             var newNode = nodes.Add(folder.Name);
@@ -228,5 +167,40 @@ namespace TP_Prog3_Catalogador
             }
         }
 
+        private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            ActualizarGrillaPrincipal();
+        }
+
+        public void ActualizarGrillaPrincipal() 
+        {
+            if (treeView1.SelectedNode == null) return;
+            //Se limpia la grilla
+            dataGridView2.Rows.Clear();
+
+            //al seleccionar nodo trae las carpetas asociadas a ese nodo
+            List<CarpetaComentada> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
+
+            if (carpetasSeleccionadas.Count() > 0)
+            {
+                foreach (CarpetaComentada carpeta in carpetasSeleccionadas)
+                {
+                    DataGridViewRow fila = new DataGridViewRow();
+                    fila.CreateCells(dataGridView2);
+                    fila.Cells[0].Value = carpeta.Directorio.FullName;
+                    fila.Cells[1].Value = carpeta.Comentario;
+                    fila.Cells[2].Value = carpeta.numeroDeDirectoriosHijos.ToString();
+                    fila.Cells[3].Value = carpeta.numeroDeArchivosHijos.ToString();
+                    fila.Cells[4].Value = carpeta.TamañoEnKB;
+                    dataGridView2.Rows.Add(fila);
+                }
+
+            }
+        }
     }
 }
