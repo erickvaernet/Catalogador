@@ -153,12 +153,36 @@ namespace TP_Prog3_Catalogador
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            //al seleccionar nodo trae las carpetas asociadas a ese nodo
-
-            List<CarpetaComentada> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
             
-            //TODO: Reveeer esto, dudo que funcione;
-            dataGridView2.DataSource = carpetasSeleccionadas;
+            //Se limpia la grilla
+            dataGridView2.Rows.Clear();
+
+            //al seleccionar nodo trae las carpetas asociadas a ese nodo
+            List<CarpetaComentada> carpetasSeleccionadas = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
+
+            if (carpetasSeleccionadas.Count() > 0)
+            {
+                foreach (CarpetaComentada carpeta in carpetasSeleccionadas) 
+                {
+                    DataGridViewRow fila = new DataGridViewRow();
+                    fila.CreateCells(dataGridView2);
+                    fila.Cells[0].Value = carpeta.Directorio.FullName;
+                    fila.Cells[1].Value = carpeta.Comentario;
+                    fila.Cells[2].Value = carpeta.numeroDeDirectoriosHijos.ToString();
+                    fila.Cells[3].Value = carpeta.numeroDeArchivosHijos.ToString();
+                    fila.Cells[4].Value = carpeta.TamañoEnKB;
+                    dataGridView2.Rows.Add(fila);
+                }
+
+            }
+            
+
+            /*
+            foreach (CarpetaComentada carpeta in carpetasSeleccionadas) 
+            {
+                dataGridView2.Rows.Add(carpeta);
+            }*/
+            
 
             
         }

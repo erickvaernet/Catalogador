@@ -66,6 +66,11 @@ namespace TP_Prog3_Catalogador
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirectoriosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArchivosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TamañoKB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -157,6 +162,12 @@ namespace TP_Prog3_Catalogador
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Comentario,
+            this.DirectoriosHijos,
+            this.ArchivosHijos,
+            this.TamañoKB});
             this.dataGridView2.Location = new System.Drawing.Point(410, 88);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
@@ -196,7 +207,7 @@ namespace TP_Prog3_Catalogador
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -347,6 +358,31 @@ namespace TP_Prog3_Catalogador
             this.dataGridView1.Size = new System.Drawing.Size(748, 270);
             this.dataGridView1.TabIndex = 7;
             // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre del Directorio";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Comentario
+            // 
+            this.Comentario.HeaderText = "Comentario";
+            this.Comentario.Name = "Comentario";
+            // 
+            // DirectoriosHijos
+            // 
+            this.DirectoriosHijos.HeaderText = "Directorios Hijos";
+            this.DirectoriosHijos.Name = "DirectoriosHijos";
+            // 
+            // ArchivosHijos
+            // 
+            this.ArchivosHijos.HeaderText = "Archivos Hijos";
+            this.ArchivosHijos.Name = "ArchivosHijos";
+            // 
+            // TamañoKB
+            // 
+            this.TamañoKB.HeaderText = "Tamaño en KB";
+            this.TamañoKB.Name = "TamañoKB";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -412,6 +448,11 @@ namespace TP_Prog3_Catalogador
         private System.Windows.Forms.TreeView treeView3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DirectoriosHijos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ArchivosHijos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TamañoKB;
     }
 }
 
