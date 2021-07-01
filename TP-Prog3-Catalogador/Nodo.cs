@@ -13,7 +13,11 @@ namespace TP_Prog3_Catalogador
         public String Comentario { get; set; }
         public List<Nodo> NodosHijos { get; set; }
 
+        public Nodo(String nombre) { this.NodosHijos = new List<Nodo>(); this.Nombre = nombre; }
 
+        public Nodo() { this.NodosHijos = new List<Nodo>();  }
+
+        /*
         public void AddNodoHijo(Nodo nodo)
         {
             if (NodosHijos != null) this.NodosHijos.Add(nodo);
@@ -22,7 +26,7 @@ namespace TP_Prog3_Catalogador
                 this.NodosHijos = new();
                 this.NodosHijos.Add(nodo);
             }
-        }
-        
+        }*/
+
     }
 }

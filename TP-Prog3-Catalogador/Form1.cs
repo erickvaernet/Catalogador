@@ -172,7 +172,9 @@ namespace TP_Prog3_Catalogador
         {
             String nombre = Interaction.InputBox("Indique el nombre de la nueva Categoria", "NuevaCategoria");
             if (treeView1.SelectedNode != null && !String.IsNullOrWhiteSpace(nombre)) {
-                treeView1.SelectedNode.Nodes.Add(nombre);
+
+                nodoAdapter.AgregarNodoHijo(nombre);
+                //treeView1.SelectedNode.Nodes.Add(nombre);
             }
 
         }

@@ -30,6 +30,22 @@ namespace TP_Prog3_Catalogador
 
         public void AgregarNodoHijo(String hijo) 
         {
+            List<int> lvls= new();
+
+            TreeNode nodo = treeView.SelectedNode;
+            while (nodo.Parent!=null) 
+            {
+                lvls.Insert(0,nodo.Index);
+                nodo = nodo.Parent;
+            }
+
+            Nodo nodoAux= nodoRaiz;
+            foreach (int lvl in lvls) 
+            {
+                nodoAux = nodoAux.NodosHijos[lvl];
+            }
+            
+            nodoAux.NodosHijos.Add(new Nodo(hijo));
             treeView.SelectedNode.Nodes.Add(hijo);
 
         }
