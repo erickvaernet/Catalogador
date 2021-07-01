@@ -52,7 +52,6 @@ namespace TP_Prog3_Catalogador
             }
         }
         
-
         private void button2_Click(object sender, EventArgs e)
         {
             

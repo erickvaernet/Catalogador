@@ -13,7 +13,8 @@ namespace TP_Prog3_Catalogador
         public String Comentario { get; set; }
         public int numeroDeDirectoriosHijos { get; set; }
         public int numeroDeArchivosHijos { get; set; }
-        public long Tamaño { get; set; }
+        private long TamañoEnBytes { get; set; }
+        public long TamañoEnKB { get; set; }
 
         public CarpetaComentada() { }
         public CarpetaComentada(DirectoryInfo dir) 
@@ -21,12 +22,21 @@ namespace TP_Prog3_Catalogador
             Directorio = dir;
             this.numeroDeArchivosHijos= dir.GetFiles().Length;
             this.numeroDeDirectoriosHijos = dir.GetDirectories().Length;
-            Tamaño = 0;
+            TamañoEnBytes = 0;
+            ObtenerTamaño(dir);
+            TamañoEnKB = TamañoEnBytes / 1000;
+
         }
         public CarpetaComentada(DirectoryInfo dir,String comentario)
         {
             Directorio = dir;
             Comentario = comentario;
+            this.numeroDeArchivosHijos = dir.GetFiles().Length;
+            this.numeroDeDirectoriosHijos = dir.GetDirectories().Length;
+            TamañoEnBytes = 0;
+            ObtenerTamaño(dir);
+
+            TamañoEnKB = TamañoEnBytes / 1000;
         }
 
         
@@ -40,7 +50,7 @@ namespace TP_Prog3_Catalogador
                 }
             }
             foreach (FileInfo archivo in dir2.GetFiles()) {
-                this.Tamaño += archivo.Length;
+                this.TamañoEnBytes += archivo.Length;
             }
             
         }
