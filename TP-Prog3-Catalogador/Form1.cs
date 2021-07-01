@@ -205,5 +205,26 @@ namespace TP_Prog3_Catalogador
         {
 
         }
+
+        private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView2.CurrentRow.Cells[0].Value == null) return;
+            DirectoryInfo directorioSeleccionado=new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
+
+            LoadFolder(treeView3.Nodes, directorioSeleccionado);
+        }
+        private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
+        {
+            var newNode = nodes.Add(folder.Name);
+            foreach (var childFolder in folder.EnumerateDirectories())
+            {
+                LoadFolder(newNode.Nodes, childFolder);
+            }
+            foreach (FileInfo file in folder.EnumerateFiles())
+            {
+                newNode.Nodes.Add(file.Name);
+            }
+        }
+
     }
 }

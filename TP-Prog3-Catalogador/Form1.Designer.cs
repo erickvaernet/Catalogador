@@ -41,6 +41,11 @@ namespace TP_Prog3_Catalogador
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirectoriosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ArchivosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TamañoKB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,11 +71,6 @@ namespace TP_Prog3_Catalogador
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DirectoriosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ArchivosHijos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TamañoKB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -169,11 +169,44 @@ namespace TP_Prog3_Catalogador
             this.ArchivosHijos,
             this.TamañoKB});
             this.dataGridView2.Location = new System.Drawing.Point(410, 88);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 25;
             this.dataGridView2.Size = new System.Drawing.Size(748, 256);
             this.dataGridView2.TabIndex = 1;
+            this.dataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseClick);
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre del Directorio";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Comentario
+            // 
+            this.Comentario.HeaderText = "Comentario";
+            this.Comentario.Name = "Comentario";
+            this.Comentario.ReadOnly = true;
+            // 
+            // DirectoriosHijos
+            // 
+            this.DirectoriosHijos.HeaderText = "Directorios Hijos";
+            this.DirectoriosHijos.Name = "DirectoriosHijos";
+            this.DirectoriosHijos.ReadOnly = true;
+            // 
+            // ArchivosHijos
+            // 
+            this.ArchivosHijos.HeaderText = "Archivos Hijos";
+            this.ArchivosHijos.Name = "ArchivosHijos";
+            this.ArchivosHijos.ReadOnly = true;
+            // 
+            // TamañoKB
+            // 
+            this.TamañoKB.HeaderText = "Tamaño en KB";
+            this.TamañoKB.Name = "TamañoKB";
+            this.TamañoKB.ReadOnly = true;
             // 
             // menuStrip1
             // 
@@ -357,31 +390,6 @@ namespace TP_Prog3_Catalogador
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(748, 270);
             this.dataGridView1.TabIndex = 7;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre del Directorio";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Comentario
-            // 
-            this.Comentario.HeaderText = "Comentario";
-            this.Comentario.Name = "Comentario";
-            // 
-            // DirectoriosHijos
-            // 
-            this.DirectoriosHijos.HeaderText = "Directorios Hijos";
-            this.DirectoriosHijos.Name = "DirectoriosHijos";
-            // 
-            // ArchivosHijos
-            // 
-            this.ArchivosHijos.HeaderText = "Archivos Hijos";
-            this.ArchivosHijos.Name = "ArchivosHijos";
-            // 
-            // TamañoKB
-            // 
-            this.TamañoKB.HeaderText = "Tamaño en KB";
-            this.TamañoKB.Name = "TamañoKB";
             // 
             // Form1
             // 
