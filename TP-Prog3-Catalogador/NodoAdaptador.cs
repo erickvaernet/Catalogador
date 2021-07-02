@@ -19,6 +19,7 @@ namespace TP_Prog3_Catalogador
         { 
         }
 
+        //Para agregar el Nodo Modelo con el cual nos manejaremos
         public void AgregarNodoRaiz(String nombre, TreeView treeView, Nodo nodoRaiz)            
         {
             if (controlRaizCreada == true) return; //no se puede crear mas de una raiz; yo deberia crear un error
@@ -30,6 +31,7 @@ namespace TP_Prog3_Catalogador
             controlRaizCreada = true;
         }
 
+        //Agrega un Nodo Hijo dentro del treeView segun donde se seleccione;
         public void AgregarNodoHijo(String hijo)
         { 
 
@@ -55,6 +57,8 @@ namespace TP_Prog3_Catalogador
 
         }
 
+        //Obtiene el Nodo del modelo correspondiente al nodo del treeview seleccionado
+        //(Sirve paara agregar carpeta a categoria, tambien usada en actualizar grillaPrincipal y para quitar nodo seleccionado)
         public Nodo MapearNodoSeleccionado() 
         {
             List<int> lvls = new();
@@ -76,6 +80,7 @@ namespace TP_Prog3_Catalogador
 
         }
 
+        //Carga la vista del treeview segun el Nodo Modelo;
         public void CargarRaizATreeView() 
         {
             try
@@ -120,6 +125,7 @@ namespace TP_Prog3_Catalogador
             else treeNode.Text = nodo.Nombre;            
         }
 
+        //Método para quitár nodo seleccionado tanto en el treeview como en el modelo
         public void QuitarNodoSeleccionado() 
         {
             Nodo nodoAeliminar = MapearNodoSeleccionado();
@@ -138,6 +144,7 @@ namespace TP_Prog3_Catalogador
 
         }
 
+        //Método Aux para quitar nodo Seleccionado
         private Nodo ObtenerPadreSeleccionado(Nodo nodo)
         {
             List<int> lvls = new();

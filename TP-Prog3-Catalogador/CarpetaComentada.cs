@@ -9,7 +9,7 @@ namespace TP_Prog3_Catalogador
 {
     public class CarpetaComentada
     {
-        public DirectoryInfo Directorio { get; set; }
+        public String Directorio { get; set; } 
         public String Comentario { get; set; }
         public int numeroDeDirectoriosHijos { get; set; }
         public int numeroDeArchivosHijos { get; set; }
@@ -19,17 +19,17 @@ namespace TP_Prog3_Catalogador
         public CarpetaComentada() { }
         public CarpetaComentada(DirectoryInfo dir) 
         {
-            Directorio = dir;
+            Directorio = dir.FullName;
             this.numeroDeArchivosHijos= dir.GetFiles().Length;
             this.numeroDeDirectoriosHijos = dir.GetDirectories().Length;
             TamañoEnBytes = 0;
             ObtenerTamaño(dir);
-            TamañoEnKB = TamañoEnBytes / 1000;
+            TamañoEnKB = TamañoEnBytes / 1024;
 
         }
         public CarpetaComentada(DirectoryInfo dir,String comentario)
         {
-            Directorio = dir;
+            Directorio = dir.FullName;
             Comentario = comentario;
             this.numeroDeArchivosHijos = dir.GetFiles().Length;
             this.numeroDeDirectoriosHijos = dir.GetDirectories().Length;
