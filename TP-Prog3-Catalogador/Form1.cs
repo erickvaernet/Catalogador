@@ -1,22 +1,17 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace TP_Prog3_Catalogador
 {
-    public partial class Form1 : Form {        
-        
+    public partial class Form1 : Form
+    {
+
         private NodoAdaptador nodoAdapter = new NodoAdaptador();
         private List<FileInfo> carpetasSeleccionadas = new List<FileInfo>();
 
@@ -26,7 +21,7 @@ namespace TP_Prog3_Catalogador
             Nodo nodoRaiz1 = new Nodo();
 
             nodoAdapter.AgregarNodoRaiz("Categorias", treeView1, nodoRaiz1);
-            
+
             treeView2.Nodes.Add("Lugares");
             label1.Text = treeView1.Nodes[0].Text;
         }
@@ -35,7 +30,8 @@ namespace TP_Prog3_Catalogador
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String nombre = Interaction.InputBox("Indique el nombre de la nueva Categoria", "NuevaCategoria");
-            if (treeView1.SelectedNode != null && !String.IsNullOrWhiteSpace(nombre)) {
+            if (treeView1.SelectedNode != null && !String.IsNullOrWhiteSpace(nombre))
+            {
 
                 nodoAdapter.AgregarNodoHijo(nombre);
             }
@@ -82,11 +78,11 @@ namespace TP_Prog3_Catalogador
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String jsonString;
-        
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(saveFileDialog1.FileName)) 
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(saveFileDialog1.FileName))
             {
                 JsonSerializerOptions options = new() { ReferenceHandler = ReferenceHandler.Preserve };
-                
+
                 //Escribir nodo en json:
                 jsonString = JsonSerializer.Serialize<Nodo>(nodoAdapter.NodoRaiz);
                 File.WriteAllText(saveFileDialog1.FileName, jsonString);
@@ -102,14 +98,14 @@ namespace TP_Prog3_Catalogador
              * seleccionado una rchivo, entonces se procede a leer el archivo .json y parsearlo a un objeto Nodo
              * el cual se usara como nueva Raiz del nodo principal del programa (nodoAdapter) 
              */
-            if (openFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(openFileDialog1.FileName)) 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(openFileDialog1.FileName))
             {
                 //Leemos el archivo y asignamos el nuevo nodo raiz, nodoadapter:
                 nodoAdapter.ControlRaizCreada = false;
 
                 String jsonString;
                 jsonString = File.ReadAllText(openFileDialog1.FileName);
-                Nodo nodoAuxiliar = JsonSerializer.Deserialize<Nodo>(jsonString);                
+                Nodo nodoAuxiliar = JsonSerializer.Deserialize<Nodo>(jsonString);
                 nodoAdapter.NodoRaiz = nodoAuxiliar;
 
                 nodoAdapter.ControlRaizCreada = true;
@@ -156,11 +152,16 @@ namespace TP_Prog3_Catalogador
         }
 
         //Métodos auxiliares para actualizar el treeview secundario
-        private void ActualizarTreeViewSecundario() {
-            if (dataGridView2.CurrentRow.Cells[0].Value == null) return;
+        private void ActualizarTreeViewSecundario()
+        {
+            treeView3.Nodes.Clear();
+            if (dataGridView2.Rows[0].IsNewRow) {
+                
+                return;
+            } 
+
             DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
 
-            treeView3.Nodes.Clear();
             LoadFolder(treeView3.Nodes, directorioSeleccionado);
             treeView3.Nodes[0].Expand();
         }
@@ -189,9 +190,10 @@ namespace TP_Prog3_Catalogador
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ActualizarGrillaPrincipal();
+            ActualizarTreeViewSecundario();
         }
 
-        public void ActualizarGrillaPrincipal() 
+        public void ActualizarGrillaPrincipal()
         {
             if (treeView1.SelectedNode == null) return;
             //Se limpia la grilla
