@@ -155,15 +155,15 @@ namespace TP_Prog3_Catalogador
         private void ActualizarTreeViewSecundario()
         {
             treeView3.Nodes.Clear();
-            if (dataGridView2.Rows[0].IsNewRow) {
-                
-                return;
-            } 
 
-            DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
+            //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
+            if (dataGridView2.Rows.Count>0) 
+            {
+                DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                LoadFolder(treeView3.Nodes, directorioSeleccionado);
+                treeView3.Nodes[0].Expand();
+            }
 
-            LoadFolder(treeView3.Nodes, directorioSeleccionado);
-            treeView3.Nodes[0].Expand();
         }
 
         private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
@@ -217,6 +217,11 @@ namespace TP_Prog3_Catalogador
                 }
 
             }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Todo: completar
         }
     }
 }
