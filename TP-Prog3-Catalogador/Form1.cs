@@ -155,14 +155,54 @@ namespace TP_Prog3_Catalogador
         {
             treeView3.Nodes.Clear();
 
-            //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
-            if (dataGridView2.Rows.Count>0 ) 
+            /*
+            if (dataGridView2.Rows.Count > 0)
             {
                 DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
                 LoadFolder(treeView3.Nodes, directorioSeleccionado);
                 treeView3.Nodes[0].Expand();
             }
+            */
 
+            //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
+            if (dataGridView2.Rows.Count>0 ) 
+            {
+                //Creamos un Elemento contenido que tendra todo el contenido de la Carpeta Comentada
+                ElementoContenido elem= new ElementoContenido();
+
+                //Rastreamos la CarpetaComentada seleccionada en la grilla;
+                elem.Contenido=MapearCarpetaEnGrillaSeleccionada().Contenido;
+                elem.FullPath = @dataGridView2.CurrentRow.Cells[0].Value.ToString();
+                elem.EsDirectorio = true;
+
+
+                //elem.Contenido = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
+                //DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                LoadFolder2(treeView3.Nodes, elem);
+                treeView3.Nodes[0].Expand();
+            }            
+        }
+
+        //Rastrea la carpetaComentada Que se encuentra seleccionada en el GridView Principal
+        private CarpetaComentada MapearCarpetaEnGrillaSeleccionada() 
+        {
+            foreach (CarpetaComentada carpeta in nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas) 
+            {
+                if (carpeta.Directorio == @dataGridView2.CurrentRow.Cells[0].Value.ToString()) return carpeta;
+                if (carpeta.Directorio == dataGridView2.CurrentRow.Cells[0].Value.ToString()) return carpeta;
+            }
+            return nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas[0];
+        }
+        private void LoadFolder2(TreeNodeCollection nodes, ElementoContenido elem)
+        {
+            //posicion del ultimo elem del nombre full (Pasar a ElementoContenido)
+            int index = elem.FullPath.Split("\\").Length - 1;
+            var newNode = nodes.Add(elem.FullPath.Split("\\")[index]);
+            foreach (var child in elem.Contenido)
+            {
+                if(child.EsDirectorio) LoadFolder2(newNode.Nodes, child);
+                else newNode.Nodes.Add(child.FullPath.Split("\\")[index+1]);
+            }
         }
 
         private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
