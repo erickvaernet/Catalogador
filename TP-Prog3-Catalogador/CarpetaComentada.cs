@@ -11,6 +11,7 @@ namespace TP_Prog3_Catalogador
     {
         public String Directorio { get; set; } 
         public String Comentario { get; set; }
+        
         public int numeroDeDirectoriosHijos { get; set; }
         public int numeroDeArchivosHijos { get; set; }
         private long TamañoEnBytes { get; set; }

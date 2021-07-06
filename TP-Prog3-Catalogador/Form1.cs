@@ -92,7 +92,6 @@ namespace TP_Prog3_Catalogador
         //Abrir archivo.json
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             /*
              * Creamos una ventana de OpenFileDialog que seleccione el archivo a abrir, si apeta en OK y se tiene
              * seleccionado una rchivo, entonces se procede a leer el archivo .json y parsearlo a un objeto Nodo
@@ -157,7 +156,7 @@ namespace TP_Prog3_Catalogador
             treeView3.Nodes.Clear();
 
             //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
-            if (dataGridView2.Rows.Count>0) 
+            if (dataGridView2.Rows.Count>0 ) 
             {
                 DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
                 LoadFolder(treeView3.Nodes, directorioSeleccionado);
@@ -217,11 +216,6 @@ namespace TP_Prog3_Catalogador
                 }
 
             }
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Todo: completar
         }
     }
 }
