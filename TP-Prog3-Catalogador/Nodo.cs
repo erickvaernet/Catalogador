@@ -11,7 +11,6 @@ namespace TP_Prog3_Catalogador
     public class Nodo
     {
         public String Nombre { get; set; } //categoria
-
        
         public List<CarpetaComentada> CarpetasComentadas { get; set; }
         public String Comentario { get; set; }
