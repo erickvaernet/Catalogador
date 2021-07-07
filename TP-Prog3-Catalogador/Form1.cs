@@ -154,16 +154,7 @@ namespace TP_Prog3_Catalogador
         private void ActualizarTreeViewSecundario()
         {
             treeView3.Nodes.Clear();
-
-            /*
-            if (dataGridView2.Rows.Count > 0)
-            {
-                DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
-                LoadFolder(treeView3.Nodes, directorioSeleccionado);
-                treeView3.Nodes[0].Expand();
-            }
-            */
-
+            
             //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
             if (dataGridView2.Rows.Count>0 ) 
             {
@@ -204,26 +195,7 @@ namespace TP_Prog3_Catalogador
                 else newNode.Nodes.Add(child.FullPath.Split("\\")[index+1]);
             }
         }
-
-        private void LoadFolder(TreeNodeCollection nodes, DirectoryInfo folder)
-        {
-            var newNode = nodes.Add(folder.Name);
-            foreach (var childFolder in folder.EnumerateDirectories())
-            {
-                LoadFolder(newNode.Nodes, childFolder);
-            }
-            foreach (FileInfo file in folder.EnumerateFiles())
-            {
-                newNode.Nodes.Add(file.Name);
-            }
-        }
-
-        //eliminar
-        private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
+        
 
         //actualizar grilla principal (dataGridView) y treeviewSecundario
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -256,6 +228,54 @@ namespace TP_Prog3_Catalogador
                 }
 
             }
+        }
+
+        private void buttonBuscar_Click(object sender, EventArgs e)
+        {
+            //limpiamos la grilla
+            dataGridView2.Rows.Clear();
+
+            //Creamos una lista vacia y la pasamos a buscarCarpetaComentada,
+            //la cual llenara la lista con los valores que coinsidan con la busqueda
+            List<CarpetaComentada> carpetasObtenidas= new();
+            BuscarCarpetaComentada(nodoAdapter.NodoRaiz,carpetasObtenidas);
+
+            //Si la lista esta vacía no hubo resultados, caso contrario se pintan los resultados en la grilla
+            if (carpetasObtenidas.Count==0) return;
+            else 
+            {
+                foreach (CarpetaComentada carpeta in carpetasObtenidas)
+                {
+                    DataGridViewRow fila = new DataGridViewRow();
+                    fila.CreateCells(dataGridView2);
+                    fila.Cells[0].Value = carpeta.Directorio;
+                    fila.Cells[1].Value = carpeta.Comentario;
+                    fila.Cells[2].Value = carpeta.numeroDeDirectoriosHijos.ToString();
+                    fila.Cells[3].Value = carpeta.numeroDeArchivosHijos.ToString();
+                    fila.Cells[4].Value = carpeta.TamañoEnKB;
+                    dataGridView2.Rows.Add(fila);
+                }
+            }
+        }
+       
+
+        //Método auxiliar para llenar una lista con CarpetasComentadas coinsidentes con la búsqueda
+        //TODO: Hayq ue hacerlo más genético y pasarle el textbox en lugar de usarlo directamente dentro
+        private void BuscarCarpetaComentada(Nodo nodoPadre, List<CarpetaComentada> carpetasResultantes) 
+        {                       
+            foreach (Nodo nodo in nodoPadre.NodosHijos)
+            {
+                if (nodo.NodosHijos.Count > 0) BuscarCarpetaComentada(nodo,carpetasResultantes);
+                else
+                {
+                    foreach (CarpetaComentada carpeta in nodo.CarpetasComentadas) 
+                    {
+                        if (carpeta.Comentario.ToLower().Contains(textBoxBusqueda.Text.ToLower()))
+                            carpetasResultantes.Add(carpeta);
+                    }
+                }
+            }
+
         }
     }
 }

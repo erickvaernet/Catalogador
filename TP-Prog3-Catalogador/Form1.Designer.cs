@@ -71,6 +71,8 @@ namespace TP_Prog3_Catalogador
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBoxBusqueda = new System.Windows.Forms.TextBox();
+            this.buttonBuscar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -379,7 +381,6 @@ namespace TP_Prog3_Catalogador
             this.treeView3.Name = "treeView3";
             this.treeView3.Size = new System.Drawing.Size(393, 270);
             this.treeView3.TabIndex = 5;
-            this.treeView3.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
             // 
             // label2
             // 
@@ -400,11 +401,30 @@ namespace TP_Prog3_Catalogador
             this.dataGridView1.Size = new System.Drawing.Size(748, 270);
             this.dataGridView1.TabIndex = 7;
             // 
+            // textBoxBusqueda
+            // 
+            this.textBoxBusqueda.Location = new System.Drawing.Point(809, 27);
+            this.textBoxBusqueda.Name = "textBoxBusqueda";
+            this.textBoxBusqueda.Size = new System.Drawing.Size(208, 23);
+            this.textBoxBusqueda.TabIndex = 8;
+            // 
+            // buttonBuscar
+            // 
+            this.buttonBuscar.Location = new System.Drawing.Point(1023, 26);
+            this.buttonBuscar.Name = "buttonBuscar";
+            this.buttonBuscar.Size = new System.Drawing.Size(117, 23);
+            this.buttonBuscar.TabIndex = 9;
+            this.buttonBuscar.Text = "Buscar s/Categoria";
+            this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1180, 611);
+            this.Controls.Add(this.buttonBuscar);
+            this.Controls.Add(this.textBoxBusqueda);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.treeView3);
@@ -470,6 +490,8 @@ namespace TP_Prog3_Catalogador
         private System.Windows.Forms.DataGridViewTextBoxColumn DirectoriosHijos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ArchivosHijos;
         private System.Windows.Forms.DataGridViewTextBoxColumn TamañoKB;
+        private System.Windows.Forms.TextBox textBoxBusqueda;
+        private System.Windows.Forms.Button buttonBuscar;
     }
 }
 
