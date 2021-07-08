@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -14,6 +15,7 @@ namespace TP_Prog3_Catalogador
 
         private NodoAdaptador nodoAdapter = new NodoAdaptador();
         private List<FileInfo> carpetasSeleccionadas = new List<FileInfo>();
+        private ElementoContenido contenidoCarpetaSeleccionada;
 
         public Form1()
         {
@@ -23,7 +25,6 @@ namespace TP_Prog3_Catalogador
             nodoAdapter.AgregarNodoRaiz("Categorias", treeView1, nodoRaiz1);
 
             treeView2.Nodes.Add("Lugares");
-            label1.Text = treeView1.Nodes[0].Text;
         }
 
         //Agregar categoria
@@ -89,6 +90,8 @@ namespace TP_Prog3_Catalogador
             }
         }
 
+        
+
         //Abrir archivo.json
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -127,6 +130,7 @@ namespace TP_Prog3_Catalogador
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK &&
                 !String.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
             {
+                //TODO: Agregar al constructor el nombbre de directorio
                 FormAgregarCarpetaEnCategoria formAgregarCarpetaEnCategoria = new FormAgregarCarpetaEnCategoria(nodoAdapter, nodoAdapter.MapearNodoSeleccionado());
 
                 formAgregarCarpetaEnCategoria.Directorio = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
@@ -166,9 +170,8 @@ namespace TP_Prog3_Catalogador
                 elem.FullPath = @dataGridView2.CurrentRow.Cells[0].Value.ToString();
                 elem.EsDirectorio = true;
 
+                this.contenidoCarpetaSeleccionada = elem;
 
-                //elem.Contenido = nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas;
-                //DirectoryInfo directorioSeleccionado = new DirectoryInfo(@dataGridView2.CurrentRow.Cells[0].Value.ToString());
                 LoadFolder2(treeView3.Nodes, elem);
                 treeView3.Nodes[0].Expand();
             }            
@@ -276,6 +279,68 @@ namespace TP_Prog3_Catalogador
                 }
             }
 
+        }
+
+
+        private void treeView3_DoubleClick(object sender, EventArgs e)
+        {
+            ElementoContenido elem= RastrearElementoSeleccionadoTVSecundario();      
+            try
+            {
+                Process proceso = new Process();
+                proceso.StartInfo.FileName= elem.FullPath;
+                proceso.StartInfo.UseShellExecute = true;
+                proceso.Start();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("El archivo o carpeta: "+elem.FullPath+"\n No se encuentra disponible. Si el contenido pertenece a un disco externo pruebe conectandolo");
+            }
+        }
+
+        private ElementoContenido RastrearElementoSeleccionadoTVSecundario()
+        {
+            List<int> lvls = new();
+
+            TreeNode treeNodeSeleccionado = treeView3.SelectedNode;
+            while (treeNodeSeleccionado.Parent != null)
+            {
+                lvls.Insert(0, treeNodeSeleccionado.Index);
+                treeNodeSeleccionado = treeNodeSeleccionado.Parent;
+            }
+
+            ElementoContenido elemetoContenidoAux = this.contenidoCarpetaSeleccionada;
+
+            foreach (int lvl in lvls)
+            {
+                elemetoContenidoAux = elemetoContenidoAux.Contenido[lvl];
+            }
+
+            return elemetoContenidoAux;
+
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Todo:Testear
+            nodoAdapter = new NodoAdaptador();
+
+            carpetasSeleccionadas = new List<FileInfo>();
+            Nodo nodoRaiz1 = new Nodo();
+
+            treeView3.Nodes.Clear();
+            dataGridView2.Rows.Clear();
+            treeView1.Nodes.Clear();
+
+            nodoAdapter.AgregarNodoRaiz("Categorias", treeView1, nodoRaiz1);
+
+            treeView2.Nodes.Add("Lugares");
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
