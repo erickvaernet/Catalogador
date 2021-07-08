@@ -78,8 +78,14 @@ namespace TP_Prog3_Catalogador
         //Guardar archivo .json
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String jsonString;
 
+            Save();
+            
+        }
+
+        private void Save() {
+
+            String jsonString;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK && !String.IsNullOrWhiteSpace(saveFileDialog1.FileName))
             {
                 JsonSerializerOptions options = new() { ReferenceHandler = ReferenceHandler.Preserve };
@@ -157,29 +163,37 @@ namespace TP_Prog3_Catalogador
         //Métodos auxiliares para actualizar el treeview secundario
         private void ActualizarTreeViewSecundario()
         {
-            treeView3.Nodes.Clear();
-            
-            //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
-            if (dataGridView2.Rows.Count>0 ) 
+            //Todo:Solucionar cuando se selecciona entre resultados buscados y borrar el try 
+            try
             {
-                //Creamos un Elemento contenido que tendra todo el contenido de la Carpeta Comentada
-                ElementoContenido elem= new ElementoContenido();
+                treeView3.Nodes.Clear();
 
-                //Rastreamos la CarpetaComentada seleccionada en la grilla;
-                elem.Contenido=MapearCarpetaEnGrillaSeleccionada().Contenido;
-                elem.FullPath = @dataGridView2.CurrentRow.Cells[0].Value.ToString();
-                elem.EsDirectorio = true;
+                //si la grilla tiene al menos una fila llena, se obtienen los archivos y carpetas de la carpeta principal
+                if (dataGridView2.Rows.Count > 0)
+                {
+                    //Creamos un Elemento contenido que tendra todo el contenido de la Carpeta Comentada
+                    ElementoContenido elem = new ElementoContenido();
 
-                this.contenidoCarpetaSeleccionada = elem;
+                    //Rastreamos la CarpetaComentada seleccionada en la grilla;
+                    elem.Contenido = MapearCarpetaEnGrillaSeleccionada().Contenido;
+                    elem.FullPath = @dataGridView2.CurrentRow.Cells[0].Value.ToString();
+                    elem.EsDirectorio = true;
 
-                LoadFolder2(treeView3.Nodes, elem);
-                treeView3.Nodes[0].Expand();
-            }            
+                    this.contenidoCarpetaSeleccionada = elem;
+
+                    LoadFolder2(treeView3.Nodes, elem);
+                    treeView3.Nodes[0].Expand();
+                }
+            }
+            catch (Exception)
+            {               
+            }
+               
         }
 
         //Rastrea la carpetaComentada Que se encuentra seleccionada en el GridView Principal
         private CarpetaComentada MapearCarpetaEnGrillaSeleccionada() 
-        {
+        {            
             foreach (CarpetaComentada carpeta in nodoAdapter.MapearNodoSeleccionado().CarpetasComentadas) 
             {
                 if (carpeta.Directorio == @dataGridView2.CurrentRow.Cells[0].Value.ToString()) return carpeta;
@@ -259,6 +273,9 @@ namespace TP_Prog3_Catalogador
                     dataGridView2.Rows.Add(fila);
                 }
             }
+
+            textBoxBusqueda.Text = "";
+
         }
        
 
@@ -340,7 +357,13 @@ namespace TP_Prog3_Catalogador
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Save();
             this.Dispose();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save();
         }
     }
 }
